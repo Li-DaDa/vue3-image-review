@@ -46,6 +46,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import './icon/iconfont.css'
 
 export default defineComponent({
   name: 'ImageReview',
@@ -234,6 +235,8 @@ export default defineComponent({
 
     // 刷新按钮
     const reflushHandler = () => {
+      // 恢复旋转
+      pic.value.rotate = 0
       computedDefaultSize()
     }
 
