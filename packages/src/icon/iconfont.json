@@ -1,0 +1,65 @@
+{
+  "id": "2961819",
+  "name": "vue3-image-review",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "基于vue3的图片查看项目使用",
+  "glyphs": [
+    {
+      "icon_id": "24432234",
+      "name": "放大",
+      "font_class": "fangda1",
+      "unicode": "e638",
+      "unicode_decimal": 58936
+    },
+    {
+      "icon_id": "24432344",
+      "name": "缩小",
+      "font_class": "suoxiao1",
+      "unicode": "e64c",
+      "unicode_decimal": 58956
+    },
+    {
+      "icon_id": "630094",
+      "name": "向右箭头",
+      "font_class": "xiangyoujiantou",
+      "unicode": "e65f",
+      "unicode_decimal": 58975
+    },
+    {
+      "icon_id": "630095",
+      "name": "向左箭头",
+      "font_class": "xiangzuojiantou",
+      "unicode": "e660",
+      "unicode_decimal": 58976
+    },
+    {
+      "icon_id": "4118038",
+      "name": "关闭",
+      "font_class": "guanbi",
+      "unicode": "eb6a",
+      "unicode_decimal": 60266
+    },
+    {
+      "icon_id": "5831339",
+      "name": "逆时针旋转",
+      "font_class": "nishizhenxuanzhuan",
+      "unicode": "e65a",
+      "unicode_decimal": 58970
+    },
+    {
+      "icon_id": "5831342",
+      "name": "顺时针旋转",
+      "font_class": "shunshizhenxuanzhuan",
+      "unicode": "e65c",
+      "unicode_decimal": 58972
+    },
+    {
+      "icon_id": "8084588",
+      "name": " 重置",
+      "font_class": "zhongzhi",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    }
+  ]
+}

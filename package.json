@@ -1,6 +1,6 @@
 {
   "name": "@webdevil/vue3-image-review",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "private": false,
   "main": "lib/index.min.js",
   "module": "lib/index.esm.js",

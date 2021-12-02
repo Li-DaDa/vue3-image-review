@@ -15,10 +15,10 @@
         draggable="true"
       ></div>
     </div>
-    <div class="md-image-review_controller-fix left">
+    <div class="md-image-review_controller-fix left" @click.stop="checkPic(-1)">
       <i class="icon iconfont icon-xiangzuojiantou"></i>
     </div>
-    <div class="md-image-review_controller-fix right">
+    <div class="md-image-review_controller-fix right" @click.stop="checkPic(1)">
       <i class="icon iconfont icon-xiangyoujiantou"></i>
     </div>
     <div class="md-image-review_controller-fix close">
@@ -41,11 +41,40 @@
         <i class="icon iconfont icon-zhongzhi"></i>
       </div>
     </div>
+    <div class="md-image-review_loading" v-show="loading">
+      <svg
+        version="1.1"
+        id="L9"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        x="0px"
+        y="0px"
+        viewBox="0 0 100 100"
+        enable-background="new 0 0 0 0"
+        xml:space="preserve"
+      >
+        <path
+          fill="#fff"
+          d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"
+        >
+          <animateTransform
+            attributeName="transform"
+            attributeType="XML"
+            type="rotate"
+            dur="1s"
+            from="0 50 50"
+            to="360 50 50"
+            repeatCount="indefinite"
+          />
+        </path>
+      </svg>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import './icon/iconfont.css'
 
 export default defineComponent({
   name: 'ImageReview',
@@ -95,6 +124,13 @@ export default defineComponent({
       rotate: 0
     })
 
+    // 当前打开的index
+    let index = 0
+    // 所有图片
+    let pics: string[] = []
+    // 图片加载loading
+    const loading = ref(false)
+
     // 计算图片默认尺寸
     const computedDefaultSize = () => {
       const image = new Image()
@@ -117,6 +153,7 @@ export default defineComponent({
         // 设置缩放速度
         scaleParams.speed.x = defaultSize.width / 10
         scaleParams.speed.y = (scaleParams.speed.x / width) * height
+        loading.value = false
       }
       image.src = pic.value.url
     }
@@ -221,19 +258,30 @@ export default defineComponent({
     }
 
     // 外部调用，打开预览
-    const review = (pics: string | string[]) => {
-      if (typeof pics === 'string') {
-        pics = [pics]
+    const review = (sources: string | string[]) => {
+      if (typeof sources === 'string') {
+        pics = [sources]
+      } else {
+        pics = sources
       }
+      index = 0
       visible.value = true
+      open()
+    }
+
+    // 打开一张图
+    const open = () => {
+      loading.value = true
       // 重置参数
-      resetParams(pics[0])
+      resetParams(pics[index])
       // 计算默认尺寸
       computedDefaultSize()
     }
 
     // 刷新按钮
     const reflushHandler = () => {
+      // 恢复旋转
+      pic.value.rotate = 0
       computedDefaultSize()
     }
 
@@ -263,9 +311,21 @@ export default defineComponent({
       pic.value.rotate = rotateList[rotateIndex]
     }
 
+    // 点击切换
+    const checkPic = (dir: number) => {
+      index = index + dir
+      if (index < 0) {
+        index = pics.length - 1
+      } else if (index > pics.length - 1) {
+        index = 0
+      }
+      open()
+    }
+
     return {
       pic,
       visible,
+      loading,
       mousewheelHandler,
       dragHandler,
       dragstartHandler,
@@ -273,7 +333,8 @@ export default defineComponent({
       review,
       reflushHandler,
       scaleHandler,
-      rotateHandler
+      rotateHandler,
+      checkPic
     }
   }
 })
@@ -369,5 +430,14 @@ export default defineComponent({
     top: 40px;
     right: 40px;
   }
+}
+.md-image-review_loading {
+  width: 91px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99999999;
+  opacity: 0.6;
 }
 </style>
