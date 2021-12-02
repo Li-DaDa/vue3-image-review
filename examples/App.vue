@@ -12,7 +12,10 @@ import { review } from '../packages'
 export default defineComponent({
   name: 'App',
   setup() {
-    const pic = 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg'
+    const pic = [
+      'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+      'https://up.enterdesk.com/edpic_source/53/0a/da/530adad966630fce548cd408237ff200.jpg'
+    ]
 
     const clickHandler = () => {
       review(pic)
